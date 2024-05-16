@@ -37,7 +37,7 @@ Route::group(['middleware' => ['LoginCheck']], function () {
     Route::get('/pendaftaran/getdata', [PendaftaranController::class, 'getList'])->name('pendaftaran.getdata');
 
     Route::get('/pendaftaran/form', [FormPendaftaranController::class, 'index'])->name('/form-pendaftaran');
-
+    Route::post('/pendaftaran/insertjalur', [FormPendaftaranController::class, 'insertjalur'])->name('insertjalur');
 
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('/riwayat');
     Route::get('/riwayat/getdata', [RiwayatController::class, 'getListData'])->name('riwayat.getdata');

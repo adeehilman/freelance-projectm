@@ -20,8 +20,10 @@
     <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
 
 
+
      <!-- Owl Carousel  -->
      <link rel="stylesheet" href="{{asset('libs/owl.carousel/dist/assets/owl.carousel.min.css')}}">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
 
         <!-- Core Css -->
     <link  id="themeColors"  rel="stylesheet" href="{{asset('css/style.min.css')}}" />

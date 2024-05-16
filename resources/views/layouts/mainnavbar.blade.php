@@ -17,7 +17,7 @@
         </ul>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             @if (request()->routeIs('dashboard'))
-            <h5 class="header-welcome">Hi, Selamat Datang {{ Auth::user()->name }}!</h5>
+            <h5 class="header-welcome">Hi, Selamat Datang {{ $userInfo->name }}!</h5>
             @else
             @endif
           <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
@@ -41,11 +41,10 @@
                     <i class="ti ti-list-check fs-6"></i>
                     <p class="mb-0 fs-3">My Task</p>
                   </a>
-                  <form class="btn btn-outline-primary mx-3 mt-2 d-block" method="POST" action="{{ route('auth.logout') }}">
-                    @csrf
-
-
-                    </form>
+                  <a href="{{ route('auth.logout') }}" class="d-flex align-items-center gap-2 dropdown-item">
+                    <i class="ti ti-list-check fs-6"></i>
+                    <p class="mb-0 fs-3">Logout</p>
+                  </a>
 
                 </div>
               </div>

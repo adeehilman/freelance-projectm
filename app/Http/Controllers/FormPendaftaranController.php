@@ -32,4 +32,36 @@ class FormPendaftaranController extends Controller
     public function getValue(Request $request){
         //TODO: lanjutkan form
     }
+
+    public function insertjalur(Request $request){
+
+        // dd($request->all());
+        try {
+            DB::beginTransaction();
+
+            $insert = DB::table('tbl_jalurpendaftaran')->insert([
+                'nama_jalur'   => $request->namaJalur,
+                'jurusan_id'   => $request->jurusanAdd,
+                'tgl_mulai'    => $request->ajaranAwal,
+                'tgl_berakhir' => $request->akhirJalur,
+                'gelombang_id' => $request->gelombangAdd,
+                'is_active'    => 1,
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'MSGTYPE' => 'S',
+                'MSG' => 'OK.',
+                'message' => 'Data succesfully Insert'
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json([
+                'MSGTYPE' => 'W',
+                'MSG' => 'Something Went Wrong',
+            ], 400);
+            dd($th);
+        }
+    }
 }

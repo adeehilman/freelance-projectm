@@ -15,12 +15,17 @@ class PendaftaranController extends Controller
 
 
         $getMenu = DB::select("SELECT * FROM tbl_menucards WHERE card_role = '$role'");
+        $getGelombang = DB::select("SELECT * FROM tbl_mastergelombang WHERE is_active = 1");
+        $getJurusan = DB::select("SELECT * FROM tbl_masterjurusan");
+
         $data = [
             'userInfo' => DB::table('tbl_users')
                 ->where('nisn', session('loggedInUser'))
                 ->first(),
             'menuItems' => $getMenu,
             'role'     => $role,
+            'list_gelombang' => $getGelombang,
+            'list_jurusan' => $getJurusan,
             // 'userRole' => (int) session()->get('loggedInUser')['session_roles'],
             // 'positionName' => DB::table('tbl_rolemeeting')
             //     ->select('name')
@@ -29,6 +34,7 @@ class PendaftaranController extends Controller
         ];
         return view('pendaftaran.index', $data);
     }
+
     public function getList(Request $request)
     {
         try {
@@ -38,6 +44,19 @@ class PendaftaranController extends Controller
 
 
             return response()->json($getCard);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    public function insertjalur(Request $request){
+
+        dd($request->all());
+        try {
+            // $insert = DB::table('tbl_jalurpendaftaran')->insert([
+            //     'nama_jalur' => $request->nama_jurusan
+            // ]);
+
         } catch (\Throwable $th) {
             dd($th);
         }
