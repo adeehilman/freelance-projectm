@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', ' Form Pendaftaran Siswa')
+@section('title', ' Edit Form Pendaftaran Siswa')
 
 
 @section('content')
@@ -8,13 +8,13 @@
             <div class="card-body px-4 py-3">
                 <div class="row align-items-center">
                     <div class="col-9">
-                        <h4 class="fw-semibold mb-8">Form Pendaftaran</h4>
+                        <h4 class="fw-semibold mb-8">Edit Form Pendaftaran</h4>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
                                     <a class="text-muted text-decoration-none" href="./index.html">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item" aria-current="page">Form Pendaftaran</li>
+                                <li class="breadcrumb-item" aria-current="page">Edit Form Pendaftaran</li>
                             </ol>
                         </nav>
                     </div>
@@ -47,7 +47,7 @@
                                         <div class="col-4">
                                             <input type="text" class="form-control required" id="namaLengkap"
                                                 name="namaLengkap" aria-describedby="emailHelp"
-                                                style="text-transform:uppercase" required>
+                                                style="text-transform:uppercase" value="John Doe" required>
                                         </div>
                                         <div class="col-2">
                                             <label for="namaPanggilan" class="form-label align-items-center">Nama
@@ -56,7 +56,7 @@
                                         <div class="col-4">
                                             <input type="text" class="form-control" id="namaPanggilan"
                                                 name="namaPanggilan" aria-describedby="emailHelp"
-                                                style="text-transform:uppercase">
+                                                style="text-transform:uppercase" value="John">
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -67,7 +67,7 @@
                                         <div class="col-md-4 d-flex align-items-center gap-3">
                                             <div class="form-check required">
                                                 <input class="form-check-input" type="radio" name="radioKelamin"
-                                                    id="radioLaki">
+                                                    id="radioLaki" checked>
                                                 <label class="form-check-label" for="radioLaki">
                                                     Laki-laki
                                                 </label>
@@ -88,8 +88,7 @@
                                         <div class="col-md-4">
                                             <select class="form-select" id="genderAdd" name="genderAdd"
                                                 data-placeholder="Pilih Agama">
-                                                <option value="" selected required>Agama</option>
-                                                <option value="islam">Islam</option>
+                                                <option value="islam" selected>Islam</option>
                                                 <option value="kristen">Kristen</option>
                                                 <option value="katolik">Katolik</option>
                                                 <option value="hindu">Hindu</option>
@@ -105,14 +104,15 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="tempatLahir"
-                                                name="tempatLahir" aria-describedby="emailHelp" required>
+                                                name="tempatLahir" aria-describedby="emailHelp" value="Batam" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="tanggalLahir" class="form-label align-items-center">Tanggal
                                                 Lahir<danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="date" class="form-control required" id="tanggalLahirSiswa" />
+                                            <input type="date" class="form-control required" id="tanggalLahirSiswa"
+                                                value="today" />
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="tinggiBadan"
-                                                name="tinggiBadan" aria-describedby="emailHelp" required>
+                                                name="tinggiBadan" aria-describedby="emailHelp" value="175" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="beratBadang" class="form-label align-items-center">Berat
@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="beratBadan"
-                                                name="beratBadan" aria-describedby="emailHelp" required>
+                                                name="beratBadan" aria-describedby="emailHelp" value="70" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -141,7 +141,7 @@
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="kebutuhanKhusus"
                                                 name="kebutuhanKhusus" aria-describedby="emailHelp"
-                                                placeholder="Isi jika ada">
+                                                placeholder="Isi jika ada" value="Tidak berkebutuhan khusus">
                                         </div>
                                     </div>
                                     <div class="row  align-items-center mb-3">
@@ -151,7 +151,8 @@
                                         </div>
                                         <div class="col-md-2">
                                             <input type="number" class="form-control required" id="saudaraKandung"
-                                                name="saudaraKandung" aria-describedby="emailHelp" required>
+                                                name="saudaraKandung" aria-describedby="emailHelp" value="2"
+                                                required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="saudaraTiri" class="form-label align-items-center">Saudara Tiri
@@ -160,7 +161,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <input type="number" class="form-control required" id="saudaraTiri"
-                                                name="saudaraTiri" aria-describedby="emailHelp" required>
+                                                name="saudaraTiri" aria-describedby="emailHelp" value="0" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="saudaraAngkat" class="form-label align-items-center">Saudara
@@ -168,7 +169,8 @@
                                         </div>
                                         <div class="col-md-2">
                                             <input type="number" class="form-control required" id="saudaraAngkat"
-                                                name="saudaraAngkat" aria-describedby="emailHelp" required>
+                                                name="saudaraAngkat" aria-describedby="emailHelp" value="0"
+                                                required>
                                         </div>
                                     </div>
 
@@ -182,7 +184,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="sttbTahun" name="sttbTahun"
-                                                aria-describedby="emailHelp" required>
+                                                aria-describedby="emailHelp" value="1234567890" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -192,7 +194,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="noNISN" name="noNISN"
-                                                aria-describedby="emailHelp" required>
+                                                aria-describedby="emailHelp" value="1234567890" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -202,7 +204,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="noUjian" name="noUjian"
-                                                aria-describedby="emailHelp" required>
+                                                aria-describedby="emailHelp" value="1234567890" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -213,7 +215,8 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="asalSekolah"
-                                                name="asalSekolah" aria-describedby="emailHelp" required>
+                                                name="asalSekolah" aria-describedby="emailHelp" value="SMPN 1 New York"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -224,7 +227,7 @@
                                         <div class="col-md-10 d-flex align-items-center gap-3">
                                             <div class="form-check required">
                                                 <input class="form-check-input" type="radio" name="radioOlahraga"
-                                                    id="radioOlahAktif">
+                                                    id="radioOlahAktif" checked>
                                                 <label class="form-check-label" for="radioOlahAktif">
                                                     Aktif
                                                 </label>
@@ -253,7 +256,7 @@
                                         <div class="col-md-10 d-flex align-items-center gap-3">
                                             <div class="form-check required">
                                                 <input class="form-check-input" type="radio" name="radioKesenian"
-                                                    id="radioSeniAktif">
+                                                    id="radioSeniAktif" checked>
                                                 <label class="form-check-label" for="radioSeniAktif">
                                                     Aktif
                                                 </label>
@@ -280,7 +283,7 @@
                                                 SMP/MTS</label>
                                         </div>
                                         <div class="col-md-10">
-                                            <textarea class="form-control" id="prestasiSMP" rows="3"></textarea>
+                                            <textarea class="form-control" id="prestasiSMP" rows="3">Juara 1 Lomba Matematika, Juara 1 Lomba Fisika, Juara 1 Lomba Kimia, Juara 1 Lomba Pemanfaatan Energi Nuklir</textarea>
                                         </div>
                                     </div>
                                 </section>
@@ -297,7 +300,8 @@
                                         </div>
                                         <div class="col-10">
                                             <input type="text" class="form-control required" id="alamatRumah"
-                                                name="alamatRumah" aria-describedby="emailHelp" required>
+                                                name="alamatRumah" aria-describedby="emailHelp"
+                                                value="Beverly Hills San Diego" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -307,7 +311,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="rtRumah"
-                                                name="rtRumah" aria-describedby="emailHelp" required>
+                                                name="rtRumah" aria-describedby="emailHelp" value="01" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="rwRumah" class="form-label align-items-center">RW<danger
@@ -315,7 +319,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="rwRumah"
-                                                name="rwRumah" aria-describedby="emailHelp" required>
+                                                name="rwRumah" aria-describedby="emailHelp" value="05" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -325,7 +329,7 @@
                                         </div>
                                         <div class="col-10">
                                             <input type="number" class="form-control required" id="kodePos"
-                                                name="kodePos" aria-describedby="emailHelp" required>
+                                                name="kodePos" aria-describedby="emailHelp" value="900990" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -336,7 +340,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="KelurahanRumah"
-                                                name="KelurahanRumah" aria-describedby="emailHelp" required>
+                                                name="KelurahanRumah" aria-describedby="emailHelp" value="San Martin 1"
+                                                required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="KecamatanRumah" class="form-label align-items-center">Kecamatan
@@ -345,7 +350,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="kecamatanRumah"
-                                                name="kecamatanRumah" aria-describedby="emailHelp" required>
+                                                name="kecamatanRumah" aria-describedby="emailHelp"
+                                                value="San Martin Pusat" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -355,7 +361,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="kotaRumah"
-                                                name="kotaRumah" aria-describedby="emailHelp" required>
+                                                name="kotaRumah" aria-describedby="emailHelp" value="San Diego" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="provRumah" class="form-label align-items-center">Provinsi<danger
@@ -363,7 +369,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="provRumah"
-                                                name="provRumah" aria-describedby="emailHelp" required>
+                                                name="provRumah" aria-describedby="emailHelp" value="New York" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -374,7 +380,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="alamatNoTelp"
-                                                name="alamatNoTelp" aria-describedby="emailHelp" required>
+                                                name="alamatNoTelp" aria-describedby="emailHelp" value="01122334455"
+                                                required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="alamatNoHp" class="form-label align-items-center">No. Hp<danger
@@ -382,7 +389,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="alamatNoHp"
-                                                name="alamatNoHp" aria-describedby="emailHelp" required>
+                                                name="alamatNoHp" aria-describedby="emailHelp" value="02233445566"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -392,7 +400,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="email" class="form-control required" id="alamatEmail"
-                                                name="alamatEmail" aria-describedby="emailHelp" required>
+                                                name="alamatEmail" aria-describedby="emailHelp"
+                                                value="johndoe@johndoe.com" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="alamatStatus" class="form-label align-items-center">Status Tempat
@@ -400,7 +409,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="alamatStatus"
-                                                name="alamatStatus" aria-describedby="emailHelp" required>
+                                                name="alamatStatus" aria-describedby="emailHelp" value="Rumah Tinggal"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -410,7 +420,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="jarakRumah" name="jarakRumah"
-                                                aria-describedby="emailHelp">
+                                                aria-describedby="emailHelp" value="9000 Km">
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -420,7 +430,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="alatTransportasi"
-                                                name="alatTransportasi" aria-describedby="emailHelp">
+                                                name="alatTransportasi" aria-describedby="emailHelp" value="Pesawat">
                                         </div>
                                     </div>
                                 </section>
@@ -436,7 +446,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="number" class="form-control" id="noNIK" name="noNIK"
-                                                aria-describedby="emailHelp" required>
+                                                aria-describedby="emailHelp" value="01234567890" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -446,7 +456,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="namaAyah"
-                                                name="namaAyah" aria-describedby="emailHelp" required>
+                                                name="namaAyah" aria-describedby="emailHelp" value="John Cena" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="namaIbu" class="form-label align-items-center">Nama Ibu<danger
@@ -454,7 +464,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="namaIbu"
-                                                name="namaIbu" aria-describedby="emailHelp" required>
+                                                name="namaIbu" aria-describedby="emailHelp" value="Marry Doe" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -465,7 +475,7 @@
                                         <div class="col-md-4 d-flex align-items-center gap-3">
                                             <div class="form-check required">
                                                 <input class="form-check-input" type="radio" name="radioAyah"
-                                                    id="radioAyahHidup">
+                                                    id="radioAyahHidup" checked>
                                                 <label class="form-check-label" for="radioAyahHidup">
                                                     Hidup
                                                 </label>
@@ -492,7 +502,7 @@
                                         <div class="col-md-4 d-flex align-items-center gap-3">
                                             <div class="form-check required">
                                                 <input class="form-check-input" type="radio" name="radioIbu"
-                                                    id="radioIbuHidup">
+                                                    id="radioIbuHidup" checked>
                                                 <label class="form-check-label" for="radioIbuHidup">
                                                     Hidup
                                                 </label>
@@ -520,7 +530,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="pekerjaanAyah"
-                                                name="pekerjaanAyah" aria-describedby="emailHelp" required>
+                                                name="pekerjaanAyah" aria-describedby="emailHelp" value="Pesenmekdon"
+                                                required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="pekerjaanIbu" class="form-label align-items-center">Pekerjaan Ibu
@@ -529,7 +540,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="pekerjaanIbu"
-                                                name="pekerjaanIbu" aria-describedby="emailHelp" required>
+                                                name="pekerjaanIbu" aria-describedby="emailHelp" value="Ibu rumah tangga"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -539,7 +551,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="penghasilanAyah"
-                                                name="penghasilanAyah" aria-describedby="emailHelp" required>
+                                                name="penghasilanAyah" aria-describedby="emailHelp" value="100000000"
+                                                required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="penghasilanIbu" class="form-label align-items-center">Penghasilan
@@ -547,7 +560,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="penghasilanIbu"
-                                                name="penghasilanIbu" aria-describedby="emailHelp" required>
+                                                name="penghasilanIbu" aria-describedby="emailHelp" value="0"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -568,7 +582,7 @@
                                                 <option value="d3">D3</option>
                                                 <option value="s1/d4">S1/D4</option>
                                                 <option value="s2">S2</option>
-                                                <option value="s3">S3</option>
+                                                <option value="s3" selected>S3</option>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
@@ -588,7 +602,7 @@
                                                 <option value="d3">D3</option>
                                                 <option value="s1/d4">S1/D4</option>
                                                 <option value="s2">S2</option>
-                                                <option value="s3">S3</option>
+                                                <option value="s3" selected>S3</option>
                                             </select>
                                         </div>
                                     </div>
@@ -598,24 +612,26 @@
                                                 Lahir Ayah<danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="date" class="form-control required" id="tanggalLahirAyah" />
+                                            <input type="date" class="form-control required" id="tanggalLahirAyah"
+                                                value="today" />
                                         </div>
                                         <div class="col-md-2">
                                             <label for="tanggalLahirIbu" class="form-label align-items-center">Tanggal
                                                 Lahir Ibu<danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="date" class="form-control required" id="tanggalLahirIbu" />
+                                            <input type="date" class="form-control required" id="tanggalLahirIbu"
+                                                value="today" />
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
                                         <div class="col-md-2">
-                                            <label for="alamatOrtu" class="form-label align-items-center">Alamat
-                                                Rumah</label>
+                                            <label for="alamatOrtu" class="form-label align-items-center">Alamat Rumah
+                                                <danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="alamatOrtu" name="alamatOrtu"
-                                                aria-describedby="emailHelp">
+                                                aria-describedby="emailHelp" value="Beverly Hills San Diego" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -625,7 +641,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="rtRumahOrtu"
-                                                name="rtRumahOrtu" aria-describedby="emailHelp" required>
+                                                name="rtRumahOrtu" aria-describedby="emailHelp" value="01" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="rwRumahOrtu" class="form-label align-items-center">RW<danger
@@ -633,7 +649,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="rwRumahOrtu"
-                                                name="rwRumahOrtu" aria-describedby="emailHelp" required>
+                                                name="rwRumahOrtu" aria-describedby="emailHelp" value="05" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -643,7 +659,7 @@
                                         </div>
                                         <div class="col-10">
                                             <input type="number" class="form-control required" id="kodePosOrtu"
-                                                name="kodePosOrtu" aria-describedby="emailHelp" required>
+                                                name="kodePosOrtu" aria-describedby="emailHelp" value="900990" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -654,7 +670,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="KelurahanRumahOrtu"
-                                                name="KelurahanRumahOrtu" aria-describedby="emailHelp" required>
+                                                name="KelurahanRumahOrtu" aria-describedby="emailHelp"
+                                                value="San Martin 1" required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="KecamatanRumahOrtu"
@@ -663,7 +680,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="kecamatanRumahOrtu"
-                                                name="kecamatanRumahOrtu" aria-describedby="emailHelp" required>
+                                                name="kecamatanRumahOrtu" aria-describedby="emailHelp"
+                                                value="San Martin Pusat" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -674,7 +692,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="kotaRumahOrtu"
-                                                name="kotaRumahOrtu" aria-describedby="emailHelp" required>
+                                                name="kotaRumahOrtu" aria-describedby="emailHelp" value="San Diego"
+                                                required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="provRumahOrtu" class="form-label align-items-center">Provinsi
@@ -683,7 +702,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control required" id="provRumahOrtu"
-                                                name="provRumahOrtu" aria-describedby="emailHelp" required>
+                                                name="provRumahOrtu" aria-describedby="emailHelp" value="New York"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -693,7 +713,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="alamatNoTelpOrtu"
-                                                name="alamatNoTelpOrtu" aria-describedby="emailHelp" required>
+                                                name="alamatNoTelpOrtu" aria-describedby="emailHelp" value="01122334455"
+                                                required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="alamatNoHpOrtu" class="form-label align-items-center">No. Hp
@@ -702,7 +723,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="number" class="form-control required" id="alamatNoHpOrtu"
-                                                name="alamatNoHpOrtu" aria-describedby="emailHelp" required>
+                                                name="alamatNoHpOrtu" aria-describedby="emailHelp" value="02233445566"
+                                                required>
                                         </div>
                                     </div>
                                 </section>
@@ -721,8 +743,8 @@
                                         <div class="col-md-10">
                                             <select class="form-select" id="jurusanAdd" name="jurusanAdd"
                                                 data-placeholder="Pilih Jurusan">
-                                                <option value="" selected required>Pilih Jurusan</option>
-                                                <option value="1">DKV</option>
+                                                <option value="" required>Pilih Jurusan</option>
+                                                <option value="1" selected>DKV</option>
                                                 <option value="2">Logistik</option>
                                             </select>
                                         </div>
@@ -736,8 +758,8 @@
                                         <div class="col-md-10">
                                             <select class="form-select" id="jurusanAdd" name="jurusanAdd"
                                                 data-placeholder="Pilih Jurusan">
-                                                <option value="" selected required>Pilih Gelombang</option>
-                                                <option value="1">1</option>
+                                                <option value="" required>Pilih Gelombang</option>
+                                                <option value="1" selected>1</option>
                                                 <option value="2">2</option>
                                             </select>
                                         </div>

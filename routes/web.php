@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResetPasswdController;
 use App\Http\Controllers\ProfilUSerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EditFormController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\FormPendaftaranController;
 use App\Http\Controllers\RiwayatController;
@@ -41,5 +42,5 @@ Route::group(['middleware' => ['LoginCheck']], function () {
 
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('/riwayat');
     Route::get('/riwayat/getdata', [RiwayatController::class, 'getListData'])->name('riwayat.getdata');
+    Route::get('/riwayat/edit', [EditFormController::class, 'index'])->name('/edit-form');
 });
-

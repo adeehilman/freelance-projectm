@@ -65,9 +65,9 @@ $(function () {
   // fixed header
   $(window).scroll(function () {
     if ($(window).scrollTop() >= 60) {
-      $(".app-header").addClass("fixed-header");
+      $(".app-header").addClass("fixed-header").css("background-color", "transparent");
     } else {
-      $(".app-header").removeClass("fixed-header");
+      $(".app-header").removeClass("fixed-header").css("background-color", "white");
     }
   });
 
