@@ -12,7 +12,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a class="text-muted text-decoration-none" href="./index.html">Dashboard</a>
+                                    <a class="text-muted text-decoration-none" href="{{ route('dashboard') }}">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item" aria-current="page">Edit Form Pendaftaran</li>
                             </ol>
@@ -627,7 +627,8 @@
                                     <div class="row d-flex  align-items-center mb-3">
                                         <div class="col-md-2">
                                             <label for="alamatOrtu" class="form-label align-items-center">Alamat Rumah
-                                                <danger class="text-danger">*</danger></label>
+                                                <danger class="text-danger">*</danger>
+                                            </label>
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="alamatOrtu" name="alamatOrtu"

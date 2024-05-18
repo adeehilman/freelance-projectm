@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('auth/index');
     }
 
@@ -64,10 +65,6 @@ class AuthController extends Controller
                 ]);
             }
         }
-    }
-
-    public function signup(){
-
     }
 
     public function logout()

@@ -2,12 +2,11 @@
 <html lang="en">
 
 <head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
+    <title>Register Page</title>
     <link rel="icon" href="{{ asset('images/logo-maarif.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/logo-maarif.png') }}" />
@@ -18,17 +17,12 @@
     <link rel="stylesheet" href="{{ asset('css/select2-bootstrap-5-theme.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
-
-
-
     <!-- Owl Carousel  -->
     <link rel="stylesheet" href="{{ asset('libs/owl.carousel/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
-
     <!-- Core Css -->
     <link id="themeColors" rel="stylesheet" href="{{ asset('css/style.min.css') }}" />
-
     <style>
         .wizard-content .wizard>.content {
             background: transparent;
@@ -38,7 +32,6 @@
             padding: 0;
             margin: 0;
             height: 100vh;
-
         }
 
         @media only screen and (max-width: 767px) {
@@ -59,36 +52,49 @@
             }
         }
     </style>
-
-    @stack('styles')
-
 </head>
 
 <body>
-    @section('mainheader')
-        @include('layouts.mainheader')
-    @show
-
-    @section('mainsidebar')
-        @include('layouts.mainsidebar')
-    @show
-
-    @section('mainnavbar')
-        @include('layouts.mainnavbar')
-    @show
-
-    @yield('content')
-
-    @section('mainfooter')
-        @include('layouts.mainfooter')
-    @show
+    <div class="container-fluid" style="background-color: #f4f7fb">
+        <div class="container">
+            <div class="row justify-content-center align-items-center vh-100">
+                <div class="col-xl-5 col-xxl-4 bg-body p-4 rounded shadow">
+                    <h2 class="mb-3 fs-7 fw-bolder text-center">Daftar akun</h2>
+                    <p class=" mb-9 text-center">Buat akun anda sekarang</p>
+                    <form action="#" id="formRegister">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="regisNisn" class="form-label">Username NISN</label>
+                            <input type="text" name="regisNisn" id="regisNisn" class="form-control"
+                                placeholder="Insert your NISN">
+                        </div>
+                        <div class="mb-4">
+                            <label for="regisPassword" class="form-label">Password</label>
+                            <input type="password" name="regisPassword" id="regisPassword" class="form-control"
+                                placeholder="Insert Password">
+                        </div>
+                        <div class="mb-4">
+                            <label for="regisConfirmPw" class="form-label">Confirm Password</label>
+                            <input type="password" name="regisConfrimPw" id="regisConfirmPw" class="form-control"
+                                placeholder="Insert Password">
+                        </div>
+                        <button type="submit" id="btnSubmit"
+                            class="btn btn-primary w-100 py-8 mb-4 rounded-2">Register</button>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <p class="mb-0 fw-medium">Sudah punya akun ?</p>
+                            <a class="text-primary fw-medium ms-2" href="{{ route('login') }}">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- <main> --}}
     {{-- </main> --}}
     <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
-
     <!-- ---------------------------------------------- -->
     <!-- core files -->
     <!-- ---------------------------------------------- -->
@@ -98,12 +104,10 @@
     <script src="{{ asset('js/sidebarmenu.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('libs/prismjs/prism.js') }}"></script>
-
     {{-- Form js --}}
     <script src="{{ asset('libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
     <script src="{{ asset('libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('js/forms/form-wizard.js') }}"></script>
-
     <script src="{{ asset('js/sidebarmenu.js') }}"></script>
     <script src="{{ asset('js/app.min.js') }}"></script>
     <script src="{{ asset('libs/apexcharts/dist/apexcharts.min.js') }}"></script>
@@ -116,11 +120,6 @@
     <script type="text/javascript" src="{{ asset('js/sweetalert2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/flatpickr.js') }}"></script>
-
-
-
-    @yield('script')
-
 </body>
 
 </html>
