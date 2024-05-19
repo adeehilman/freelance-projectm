@@ -83,6 +83,7 @@
         @include('layouts.mainfooter')
     @show
 
+
     {{-- <main> --}}
     {{-- </main> --}}
     <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
@@ -92,6 +93,7 @@
     <!-- ---------------------------------------------- -->
     <!-- core files -->
     <!-- ---------------------------------------------- -->
+    {{-- <script src="{{ asset('libs/apexcharts/dist/apexcharts.min.js') }}"></script> --}}
     <script src="{{ asset('js/app.min.js') }}"></script>
     <script src="{{ asset('js/app.init.js') }}"></script>
     <script src="{{ asset('js/app-style-switcher.js') }}"></script>
@@ -106,7 +108,6 @@
 
     <script src="{{ asset('js/sidebarmenu.js') }}"></script>
     <script src="{{ asset('js/app.min.js') }}"></script>
-    <script src="{{ asset('libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('libs/simplebar/dist/simplebar.min.js') }}"></script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
@@ -117,9 +118,9 @@
     <script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/flatpickr.js') }}"></script>
 
-
-
     @yield('script')
+
+
 
 </body>
 

@@ -40,10 +40,17 @@ class PendaftaranController extends Controller
         try {
             $getCard = DB::select("SELECT *, b.nama_jurusan, b.color_label, a.jurusan_id,
             (SELECT nama_gelombang FROM tbl_mastergelombang c WHERE a.gelombang_id = c.id) as nama_gelombang
-            FROM tbl_jalurpendaftaran a INNER JOIN tbl_masterjurusan b ON a.jurusan_id = b.id WHERE is_active = '1' ");
+            FROM tbl_jalurpendaftaran a INNER JOIN tbl_masterjurusan b ON a.jurusan_id = b.id  ");
 
+            foreach ($getCard as $key => $value) {
+                # ambil total pendaftar
+                $totaldaftar = DB::select("SELECT COUNT(*) as total FROM tbl_pendaftaransiswa WHERE jalurpendaftaran_id = $value->id");
+            }
 
-            return response()->json($getCard);
+            return response()->json([
+                'jalurdaftar' => $getCard,
+                'totaldaftar' => $totaldaftar,
+            ]);
         } catch (\Throwable $th) {
             dd($th);
         }

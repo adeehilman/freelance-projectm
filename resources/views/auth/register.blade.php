@@ -66,23 +66,35 @@
                         <div class="mb-3">
                             <label for="regisNisn" class="form-label">Username NISN</label>
                             <input type="text" name="regisNisn" id="regisNisn" class="form-control"
-                                placeholder="Insert your NISN">
+                                placeholder="Insert your NISN" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regisNisn" class="form-label">Nama Lengkap</label>
+                            <input type="text" name="name" id="name" class="form-control"
+                                placeholder="Masukkan nama lengkap"  style="text-transform:uppercase"required>
                         </div>
                         <div class="mb-4">
                             <label for="regisPassword" class="form-label">Password</label>
                             <input type="password" name="regisPassword" id="regisPassword" class="form-control"
-                                placeholder="Insert Password">
+                                placeholder="Masukkan Password" required>
                         </div>
                         <div class="mb-4">
                             <label for="regisConfirmPw" class="form-label">Confirm Password</label>
                             <input type="password" name="regisConfrimPw" id="regisConfirmPw" class="form-control"
-                                placeholder="Insert Password">
+                                placeholder="Masukkan Password" required>
+                            <div class="invalid-feedback">
+                                Passwords do not match.
+                            </div>
                         </div>
+                        <button class="btn btn-primary d-none" type="button" id="SpinnerBtnAdd">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
                         <button type="submit" id="btnSubmit"
                             class="btn btn-primary w-100 py-8 mb-4 rounded-2">Register</button>
                         <div class="d-flex align-items-center justify-content-center">
                             <p class="mb-0 fw-medium">Sudah punya akun ?</p>
-                            <a class="text-primary fw-medium ms-2" href="{{ route('login') }}">Login</a>
+                            <a class="text-primary fw-medium ms-2">Login</a>
                         </div>
                     </form>
                 </div>
@@ -121,5 +133,48 @@
     <script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/flatpickr.js') }}"></script>
 </body>
+
+<script>
+    document.getElementById('formRegister').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const password = document.getElementById('regisPassword').value;
+        const confirmPassword = document.getElementById('regisConfirmPw').value;
+
+        if (password !== confirmPassword) {
+            document.getElementById('regisConfirmPw').classList.add('is-invalid');
+        } else {
+            document.getElementById('regisConfirmPw').classList.remove('is-invalid');
+            // Submit the form or further processing here
+            this.submit();
+        }
+    });
+
+    $('#formRegister').on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '{{ route('registerAccount') }}',
+            method: 'POST',
+            data: new FormData(this),
+            cache: false,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            beforeSend: () => {
+                spinner('SpinnerBtnAdd', 'btnSubmit');
+            }
+        }).done(res => {
+            hideSpinner('SpinnerBtnAdd', 'btnSubmit');
+            showMessage('success', res.message);
+            $('#modalAddJalur').modal('hide');
+            $('#formRegister').trigger('reset');
+            window.location = '{{ route('login') }}'
+            // window.location.reload();
+        }).fail(err => {
+            showMessage('error', 'Sorry! we failed to insert data')
+            hideSpinner('SpinnerBtnAdd', 'btnSubmit');
+        });
+    });
+</script>
 
 </html>

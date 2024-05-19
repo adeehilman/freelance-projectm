@@ -10,11 +10,25 @@
 @endsection
 @section('title', 'Login Page')
 
+<style>
+     .logo-container {
+            position: absolute;
+            top: 20px; /* Adjust this value as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+</style>
 @section('content')
     <div class="container-fluid" style="background-color: #f4f7fb">
+        <div class="logo-container">
+            <img src="{{ asset('favicon.ico') }}" alt="Logo-Dark" class="dark-logo">
+        </div>
         <div class="container">
             <div class="row justify-content-center align-items-center vh-100">
                 <div class="col-xl-5 col-xxl-4 bg-body p-4 rounded shadow">
+
                     <h2 class="mb-3 fs-7 fw-bolder text-center">Selamat Datang</h2>
                     <p class=" mb-9 text-center">Masuk ke akun anda</p>
                     <form action="#" method="POST" id="formLogin">
@@ -40,8 +54,12 @@
                             <a class="text-primary fw-medium" href="#">Lupa
                                 Password ?</a>
                         </div>
+                        <button class="btn btn-success d-none w-100 py-8 mb-4 rounded-2" type="button" id="SpinnerBtnAdd">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
                         <button type="submit" id="btnSubmit"
-                            class="btn btn-primary w-100 py-8 mb-4 rounded-2">Login</button>
+                            class="btn btn-success w-100 py-8 mb-4 rounded-2">Login</button>
                         <div class="d-flex align-items-center justify-content-center">
                             <p class="mb-0 fw-medium">Belum punya akun ?</p>
                             <a class="text-primary fw-medium ms-2" href="{{ route('register') }}">Buat akun</a>
@@ -69,7 +87,7 @@
                 data: $(this).serialize(),
                 dataType: 'json',
                 beforeSend: () => {
-                    btnSubmit.prepend(loaderIcon)
+                    spinner('SpinnerBtnAdd', 'btnSubmit');
                 },
                 success: res => {
                     if (res.status === 400) {
@@ -80,6 +98,7 @@
                     }
 
                     if (res.status === 401) {
+                        hideSpinner('SpinnerBtnAdd', 'btnSubmit');
                         showMessage('error', res.messages);
                     }
 
@@ -91,6 +110,10 @@
                         console.log(res);
                         btnSubmit.children().remove();
                     }
+                },
+                error: err => {
+
+                    showMessage('error', res.messages);
                 }
             })
         })

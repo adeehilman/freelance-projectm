@@ -149,7 +149,9 @@
             })
 
             // TODO: kalau sempat buatkan dinamis image di card menu
-            .done(res => {
+            .done(response => {
+                const res = response.jalurdaftar;
+
                 const htmlElements = res.map(item => {
                     // Konversi tgl_mulai ke objek Date
                     const startDate = new Date(item.tgl_mulai);
@@ -166,6 +168,9 @@
                         month: 'long',
                         year: 'numeric'
                     });
+
+                    const buttonClass = item.is_active == 0 ? 'btn-gray disabled' : 'btn-primary';
+                    const buttonText = item.is_active == 0 ? 'PENDAFTARAN TIDAK AKTIF' : 'DAFTAR';
 
                     return `
                         <div class="col-sm-4">
@@ -184,8 +189,20 @@
                                                 <p class="card-text">Gelombang</p>
                                                 <p class="card-text">${item.nama_gelombang}</p>
                                             </div>
-                                            <a href="{{ route('/form-pendaftaran') }}" data-id${item.jurusan_id} class="btn btn-primary mt-2">DAFTAR</a>
                                         </div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-6">
+                                                <p>Kuota</p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <span>${item.kuota}</span>
+                                            </div>
+
+
+                                            <a href="{{ url('/pendaftaran/form') }}/${item.id}" class="btn ${buttonClass} mt-2">${buttonText}</a>
+
+                                        </div>
+
 
                                     </div>
                             </div>

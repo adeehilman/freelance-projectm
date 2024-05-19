@@ -34,7 +34,8 @@
                         <div class="card-body wizard-content">
                             <h4 class="card-title">Biodata diri</h4>
                             <p class="card-subtitle mb-6 text-danger"> *wajib diisi</p>
-                            <form action="#" class="validation-wizard wizard-circle">
+                            <form action="#" class="validation-wizard wizard-circle" id="FormAddDaftar">
+                                @csrf
                                 <!-- Step 1 -->
                                 <h6>Step 1</h6>
                                 <section>
@@ -66,15 +67,15 @@
                                         </div>
                                         <div class="col-md-4 d-flex align-items-center gap-3">
                                             <div class="form-check required">
-                                                <input class="form-check-input" type="radio" name="radioKelamin"
-                                                    id="radioLaki">
+                                                <input class="form-check-input" type="radio" name="radiogender" value="L"
+                                                    id="radiogender">
                                                 <label class="form-check-label" for="radioLaki">
                                                     Laki-laki
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="radioKelamin"
-                                                    id="radioPerempuan">
+                                                <input class="form-check-input" type="radio" name="radiogender" value="P"
+                                                    id="radiogender">
                                                 <label class="form-check-label" for="radioPerempuan">
                                                     Perempuan
                                                 </label>
@@ -86,7 +87,7 @@
                                             </label>
                                         </div>
                                         <div class="col-md-4">
-                                            <select class="form-select" id="genderAdd" name="genderAdd"
+                                            <select class="form-select" id="agamaAdd" name="agamaAdd"
                                                 data-placeholder="Pilih Agama">
                                                 <option value="" selected required>Agama</option>
                                                 <option value="islam">Islam</option>
@@ -192,7 +193,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" id="noNISN" name="noNISN"
-                                                aria-describedby="emailHelp" required>
+                                                aria-describedby="emailHelp" maxlength="10" required>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -611,10 +612,10 @@
                                     <div class="row d-flex  align-items-center mb-3">
                                         <div class="col-md-2">
                                             <label for="alamatOrtu" class="form-label align-items-center">Alamat
-                                                Rumah</label>
+                                                Rumah <danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" id="alamatOrtu" name="alamatOrtu"
+                                            <input type="text" class="form-control required" id="alamatOrtu" name="alamatOrtu"
                                                 aria-describedby="emailHelp">
                                         </div>
                                     </div>
@@ -721,9 +722,11 @@
                                         <div class="col-md-10">
                                             <select class="form-select" id="jurusanAdd" name="jurusanAdd"
                                                 data-placeholder="Pilih Jurusan">
-                                                <option value="" selected required>Pilih Jurusan</option>
-                                                <option value="1">DKV</option>
-                                                <option value="2">Logistik</option>
+                                                @foreach ($list_jurusan as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $jurusan == $item->id ? 'selected' : '' }}>
+                                                        {{ $item->nama_jurusan }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -734,11 +737,14 @@
                                                     class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-10">
-                                            <select class="form-select" id="jurusanAdd" name="jurusanAdd"
-                                                data-placeholder="Pilih Jurusan">
-                                                <option value="" selected required>Pilih Gelombang</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                            <select class="form-select" id="gelomhangAdd" name="gelomhangAdd"
+                                                data-placeholder="Pilih Gelombang">
+
+                                                @foreach ($list_gelombang as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $gelombang == $item->id ? 'selected' : '' }}>
+                                                        {{ $item->nama_gelombang }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -748,9 +754,15 @@
                                                 Pendaftaran<danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control required" id="tinggibadan"
-                                                name="tinggibadan" aria-describedby="emailHelp"
-                                                value="JALUR PENDAFTARAN PMDK" disabled>
+                                            <input type="text" value="{{ $jalur }}" name="jalurId" hidden>
+                                            <select class="form-select" id="jalurAdd" name="jalurAdd"
+                                                data-placeholder="Pilih Jalur">
+                                                @foreach ($list_jalur as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $jalur == $item->id ? 'selected' : '' }}>
+                                                        {{ $item->nama_jalur }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -760,8 +772,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control required" id="tinggibadan"
-                                                name="tinggibadan" aria-describedby="emailHelp" value="2024/2025"
-                                                disabled>
+                                                name="tahunAJaran" aria-describedby="emailHelp" value="">
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -771,12 +782,12 @@
                                         </div>
                                         <div class="col-md-10">
                                             <input type="file" class="form-control required" id="tinggibadan"
-                                                name="tinggibadan" aria-describedby="emailHelp" value="2024/2025"
-                                                disabled>
+                                                name="buktiBayarAdd" aria-describedby="emailHelp" value="2024/2025">
 
                                         </div>
                                     </div>
                                 </section>
+                                <button type="submit" id="btnSubmit" hidden>submit</button>
                             </form>
                         </div>
                     </div>
@@ -793,8 +804,80 @@
 @section('script')
 
     <script>
-        $('#genderAdd').select2({
-            theme: "bootstrap-5",
+        // function akan terpanggil di fowm-wizard.js
+        function functionAjaxInsert() {
+            Swal.fire({
+                title: "Apa kamu ingin menambah data diri?",
+                text: "Pastikan data diri anda benar",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonColor: '#6e7881',
+                confirmButtonColor: '#dd3333',
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Yes',
+                reverseButtons: true,
+                customClass: {
+                    confirmButton: "swal-confirm-right",
+                    cancelButton: "swal-cancel-left"
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = new FormData($('#FormAddDaftar')[0]);
+
+                    $.ajax({
+                        url: '{{ route('insertSiswa') }}',
+                        method: 'POST',
+                        data: formData,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json',
+                        beforeSend: () => {
+                            spinner('SpinnerBtnAdd', 'btnSubmit');
+                        }
+                    }).done(res => {
+                        hideSpinner('SpinnerBtnAdd', 'btnSubmit');
+                        showMessage('success', res.message);
+                        $('#FormAddDaftar').trigger('reset');
+                        window.location = '{{ route('/riwayat') }}';
+                    }).fail(errors => {
+                        showMessage('error', errors.message);
+                        hideSpinner('SpinnerBtnAdd', 'btnSubmit');
+                    });
+                }
+            })
+
+        }
+
+        $('#FormAddDaftar').on('submit', function(e) {
+            e.preventDefault();
+
+            var formData = new FormData(this); // Membuat objek FormData untuk mengambil nilai-nilai formulir
+
+            // Mengambil nilai-nilai dari formData
+
+            $.ajax({
+                url: '{{ route('insertSiswa') }}',
+                method: 'POST',
+                data: new FormData(this),
+                cache: false,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                beforeSend: () => {
+                    spinner('SpinnerBtnAdd', 'btnSubmit');
+                }
+            }).done(res => {
+                hideSpinner('SpinnerBtnAdd', 'btnSubmit');
+                showMessage('success', res.message);
+                $('#modalAddJalur').modal('hide');
+                $('#formRegister').trigger('reset');
+                window.location = '{{ route('login') }}'
+                // window.location.reload();
+            }).fail(err => {
+                showMessage('error', err.message)
+                hideSpinner('SpinnerBtnAdd', 'btnSubmit');
+            });
         });
         // Start Date Add
     </script>

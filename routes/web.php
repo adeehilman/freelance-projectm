@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/registerAccount', [RegisterController::class, 'registerAccount'])->name('registerAccount');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 // Route::get('/resetpasswd', [ResetPasswdController::class, 'index'])->name('resetpasswd');
 // Route::get('/profile', [ProfilUserController::class, 'index'])->name('profile');
@@ -40,7 +41,8 @@ Route::group(['middleware' => ['LoginCheck']], function () {
     Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('/pendaftaran');
     Route::get('/pendaftaran/getdata', [PendaftaranController::class, 'getList'])->name('pendaftaran.getdata');
 
-    Route::get('/pendaftaran/form', [FormPendaftaranController::class, 'index'])->name('/form-pendaftaran');
+    Route::get('/pendaftaran/form/{id}', [FormPendaftaranController::class, 'index'])->name('/form-pendaftaran');
+    Route::post('/pendaftaran/form/insertSiswa', [FormPendaftaranController::class, 'insertSiswa'])->name('insertSiswa');
     Route::post('/pendaftaran/insertjalur', [FormPendaftaranController::class, 'insertjalur'])->name('insertjalur');
 
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('/riwayat');
@@ -48,4 +50,5 @@ Route::group(['middleware' => ['LoginCheck']], function () {
     Route::get('/riwayat/edit', [EditFormController::class, 'index'])->name('/edit-form');
 
     Route::get('/akun', [AkunController::class, 'index'])->name('akun');
+
 });
