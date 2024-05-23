@@ -113,7 +113,7 @@
                                                 Lahir<danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="date" class="form-control required" id="tanggalLahirSiswa" />
+                                            <input type="date" class="form-control required" id="tanggalLahirSiswa" name="tanggalLahirSiswa" />
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -285,7 +285,7 @@
                                         </div>
                                     </div>
                                 </section>
-
+{{-- TODO: penambahan di table ortu untuk tgl lahir dan keaadan ayah ibu --}}
                                 <!-- Step 2 -->
                                 <h6>Step 2</h6>
                                 <section>
@@ -765,6 +765,7 @@
                                             </select>
                                         </div>
                                     </div>
+                                    {{-- TODO: tambah tahunajaran di insert siswabaru --}}
                                     <div class="row d-flex  align-items-center mb-3">
                                         <div class="col-md-2">
                                             <label for="exampleInputEmail1" class="form-label align-items-center">Tahun

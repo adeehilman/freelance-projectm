@@ -120,8 +120,6 @@
 
     @yield('script')
 
-
-
 </body>
 
 </html>

@@ -40,10 +40,16 @@ Route::group(['middleware' => ['LoginCheck']], function () {
 
     Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('/pendaftaran');
     Route::get('/pendaftaran/getdata', [PendaftaranController::class, 'getList'])->name('pendaftaran.getdata');
+    Route::get('/pendaftaran/getEdit', [PendaftaranController::class, 'getEdit'])->name('pendaftaran.getEdit');
+    Route::post('/pendaftaran/update', [PendaftaranController::class, 'update'])->name('editJalur');
 
     Route::get('/pendaftaran/form/{id}', [FormPendaftaranController::class, 'index'])->name('/form-pendaftaran');
     Route::post('/pendaftaran/form/insertSiswa', [FormPendaftaranController::class, 'insertSiswa'])->name('insertSiswa');
+    Route::post('/pendaftaran/form/updateSiswa', [EditFormController::class, 'updateSiswa'])->name('updateSiswa');
     Route::post('/pendaftaran/insertjalur', [FormPendaftaranController::class, 'insertjalur'])->name('insertjalur');
+    Route::get('/pendaftaran/form/edit/{id}', [EditFormController::class, 'index'])->name('/form-pendaftaran/edit');
+
+    Route::get('/userrole', [AkunController::class, 'index'])->name('/userrole');
 
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('/riwayat');
     Route::get('/riwayat/getdata', [RiwayatController::class, 'getListData'])->name('riwayat.getdata');

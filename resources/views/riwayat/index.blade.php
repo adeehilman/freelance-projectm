@@ -19,7 +19,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <img class="w-100" src="{{ asset('images/buktipembayaran.jpg') }}" alt="">
+                        <img id="buktibayar" class="w-100" src="{{ asset('images/buktipembayaran.jpg') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -77,111 +77,55 @@
             <div class="card-body">
 
                 <h4 class="card-title mb-3">Riwayat Pendaftaran</h4>
+                <div id="containerCards" class="table-responsive">
 
-                <div class="table-responsive">
-                    <table id="multi_col_order" class="table table-bordered table-hover align-middle text-nowrap">
-                        <thead class="table-light">
-                            <!-- start row -->
-                            <tr>
-                                <th>Jalur Pendaftaran</th>
-                                <th>NISN</th>
-                                <th>Virtual Account</th>
-                                <th>Tahun Ajaran</th>
-                                <th>Status Pembayaran</th>
-                                <th>Status Registrasi</th>
-                                <th>Detail</th>
-                                <th>Aksi</th>
+                    <div class="table-responsive">
 
-                            </tr>
-                            <!-- end row -->
-                        </thead>
-                        <tbody>
-                            <!-- start row -->
-                            <tr>
-                                <td>JALUR PENDAFTARAN UMUM</td>
-                                <td class="text-center">9384015273</td>
-                                <td class="text-center">1122334455667788</td>
-                                <td class="text-center">2024/2025</td>
-                                <td class="text-danger text-center fw-semibold">Belum bayar</td>
-                                <td class="text-warning text-center fw-semibold">Belum dikonfirmasi</td>
-                                <td class="text-center"><button type="button" class="btn btn-primary"
-                                        data-bs-toggle="modal" data-bs-target="#modalBuktiPembayaran">
-                                        Lihat
-                                    </button></td>
-                                <td class="text-center"><button type="button" class="btn btn-warning btnEdit">
-                                        Edit
-                                    </button></td>
-                            </tr>
-                            <!-- end row -->
-                            <!-- start row -->
-                            <tr>
-                                <td>BEASISWA ANAK PULAU</td>
-                                <td class="text-center">9384015273</td>
-                                <td class="text-center">1122334455667788</td>
-                                <td class="text-center">2024/2025</td>
-                                <td class="text-danger text-center fw-semibold">Belum bayar</td>
-                                <td class="text-danger text-center fw-semibold">Ditolak</td>
-                                <td class="text-center"><button type="button" class="btn btn-primary"
-                                        data-bs-toggle="modal" data-bs-target="#modalBuktiPembayaran">
-                                        Lihat
-                                    </button></td>
-                                <td class="text-center"><button type="button" class="btn btn-warning btnEdit">
-                                        Edit
-                                    </button></td>
-                            </tr>
-                            <!-- end row -->
-                            <!-- start row -->
-                            <tr>
-                                <td>BEASISWA TAHFIDZ ALQURAN</td>
-                                <td class="text-center">9384015273</td>
-                                <td class="text-center">1122334455667788</td>
-                                <td class="text-center">2024/2025</td>
-                                <td class="text-success text-center fw-semibold">Sudah bayar</td>
-                                <td class="text-success text-center fw-semibold">Diterima</td>
-                                <td class="text-center"><button type="button" class="btn btn-primary"
-                                        data-bs-toggle="modal" data-bs-target="#modalBuktiPembayaran">
-                                        Lihat
-                                    </button></td>
-                                <td class="text-center"><button type="button" class="btn btn-warning btnEdit">
-                                        Edit
-                                    </button></td>
-                            </tr>
-                            <!-- end row -->
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
+
+
         </div>
 
+    @endsection
 
-    </div>
+    @section('script')
+        <script>
+               const loadSpin = `<div class="d-flex justify-content-center align-items-center mt-5">
+                <div class="spinner-border d-flex justify-content-center align-items-center text-danger" role="status"><span class="visually-hidden">Loading...</span></div>
+            </div> `;
+            $.ajax({
+                    url: "{{ route('riwayat.getdata') }}",
+                    method: "GET",
+                    data: {},
+                    beforeSend: () => {
+                        $('#containerCards').html(loadSpin)
+                        // console.log(selectRoom)
+                    }
+                })
+                .done(res => {
+                    $('#containerCards').html(res)
 
-@endsection
+                })
 
-@section('script')
-    <script>
-        $.ajax({
-            url: "{{ route('riwayat.getdata') }}",
-            method: "GET",
-            data: {},
-            beforeSend: () => {
-                $('#containerCards').html()
-                // console.log(selectRoom)
-                $('#tblRiwayat').DataTable({
-                    searching: false,
-                    lengthChange: false,
-                    order: [], // Menghilangkan pengurutan default
-                    columnDefs: [{
-                            targets: 'sortable',
-                            orderable: false
-                        } // Mengaktifkan pengurutan pada kolom-kolom yang memiliki kelas "sortable"
-                    ],
-                });
-            }
-        });
+            $('.btnEdit').on('click', function(e) {
+                window.location.href = '{{ route('/edit-form') }}';
+            })
 
-        $('.btnEdit').on('click', function(e) {
-            window.location.href = '{{ route('/edit-form') }}';
-        })
-    </script>
-@endsection
+            $(document).on('click', '.btnDetail', function(e) {
+                e.preventDefault();
+
+                const id = $(this).data('id');
+                const buktibayar = $(this).data('image');
+                const modalFormEdit = $('#modalBuktiPembayaran');
+                const buktibayarLengkap = 'UploadBuktiBayar/' + buktibayar;
+
+                $('#buktibayar').attr('src', buktibayarLengkap);
+                modalFormEdit.modal('show');
+
+                // Ajax request
+
+            });
+        </script>
+    @endsection

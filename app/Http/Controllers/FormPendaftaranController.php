@@ -146,7 +146,7 @@ class FormPendaftaranController extends Controller
 
         try {
             DB::beginTransaction();
-
+            // TODO: insert ortu keadaan, ortu tanggallahir, tahunajaran
             $siswaId = DB::table('tbl_siswabaru')->insertGetId([
                 'nisn'  => $request->noNISN,
                 'nama_lengkap'  => $request->namaLengkap,
@@ -217,7 +217,6 @@ class FormPendaftaranController extends Controller
             ]);
 
             DB::table('tbl_pendaftaransiswa')->insert([
-                'nisn'  => $request->noNISN,
                 'siswa_id'  => $siswaId,
                 'virtual_account'  => $request->noNISN,
                 'jalurpendaftaran_id'  => $request->jalurId,

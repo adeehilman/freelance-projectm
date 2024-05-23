@@ -94,7 +94,7 @@
                             class="btn btn-primary w-100 py-8 mb-4 rounded-2">Register</button>
                         <div class="d-flex align-items-center justify-content-center">
                             <p class="mb-0 fw-medium">Sudah punya akun ?</p>
-                            <a class="text-primary fw-medium ms-2">Login</a>
+                            <a href="{{ route('login') }}" class="text-primary fw-medium ms-2">Login</a>
                         </div>
                     </form>
                 </div>

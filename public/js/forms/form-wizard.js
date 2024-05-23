@@ -150,7 +150,11 @@ $(".validation-wizard").steps({
     return (form.validate().settings.ignore = ":disabled"), form.valid();
   },
   onFinished: function (event, currentIndex) {
-      functionAjaxInsert();
+    if (typeof functionAjaxInsert === 'function') {
+        functionAjaxInsert();
+    } else if (typeof functionAjaxUpdate === 'function') {
+        functionAjaxUpdate();
+    }
   },
 }),
   $(".validation-wizard").validate({

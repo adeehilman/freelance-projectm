@@ -7,19 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class RiwayatController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $sessionLogin = session('loggedInUser');
-                $badge_id = $sessionLogin['session_badge'];
-                $role = $sessionLogin['session_roles'];
-
+        $badge_id = $sessionLogin['session_badge'];
+        $role = $sessionLogin['session_roles'];
 
         $getMenu = DB::select("SELECT * FROM tbl_menucards WHERE card_role = '$role'");
         $data = [
-            'userInfo' => DB::table('tbl_users')
-                ->where('nisn', session('loggedInUser'))
-                ->first(),
+            'userInfo' => DB::table('tbl_users')->where('nisn', session('loggedInUser'))->first(),
             'menuItems' => $getMenu,
-            'role'     => $role,
+            'role' => $role,
             // 'userRole' => (int) session()->get('loggedInUser')['session_roles'],
             // 'positionName' => DB::table('tbl_rolemeeting')
             //     ->select('name')
@@ -29,64 +27,73 @@ class RiwayatController extends Controller
         return view('riwayat.index', $data);
     }
 
-    public function getListData(Request $request){
+    public function getListData(Request $request)
+    {
         $sessionLogin = session('loggedInUser');
-                $badge_id = $sessionLogin['session_badge'];
-                $role = $sessionLogin['session_roles'];
+        $nisn = $sessionLogin['session_badge'];
+        $role = $sessionLogin['session_roles'];
 
-        $result = DB::select("SELECT id, (SELECT nama_jalur FROM tbl_jalurpendaftaran e
-                    WHERE e.id = a.jalurpendaftaran_id) AS jalurpendaftaran, nisn, virtual_account, tahunajaran,
-                    (SELECT nama_payment FROM tbl_statuspayment b WHERE b.id = a.statusdaftar_id) AS namaregistrasi ,
-                    (SELECT nama_registrasi FROM tbl_statusregistrasi d WHERE d.id = a.statusdaftar_id) AS namaregistrasi
-                    FROM tbl_pendaftaransiswa a ");
+        if($role == 1 || $role == 2){
+            $code = "SELECT id FROM tbl_siswabaru a";
+        }else{
+            $code = "SELECT id FROM tbl_siswabaru a WHERE a.nisn = $nisn";
+        }
+        // dd($nisn);
+        $result = DB::select("SELECT ps.id as idReg, jp.nama_jalur, sb.nisn, ps.virtual_account, ps.tahunajaran,
+        payment.color as colorpayment,
+        regis.color as regiscolor,
+        payment.nama_payment, regis.nama_registrasi, ps.bukti_bayar
 
+        FROM tbl_pendaftaransiswa ps
+        INNER JOIN tbl_siswabaru sb ON ps.siswa_id = sb.id
+        INNER JOIN tbl_mastergelombang mg ON ps.gel_id = mg.id
+        INNER JOIN tbl_jalurpendaftaran jp ON ps.jalurpendaftaran_id = jp.id
+        INNER JOIN tbl_statuspayment payment ON payment.id = ps.statusdaftar_id
+        INNER JOIN tbl_statusregistrasi regis ON regis.id = ps.statusdaftar_id
+        WHERE siswa_id IN ($code)");
 
         $output = '';
         $output .= '
-            <table id="tblRiwayat" class="table table-responsive table-hover" style="font-size: 16px">
-                <thead>
-                    <tr style="color: #CD202E; height: 10px;" class="table-danger ">
-                        <th class="p-3" scope="col">Room</th>
-                        <th class="p-3" scope="col">Floor</th>
-                        <th class="p-3" scope="col">Capacity</th>
-                        <th class="p-3" scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <table id="multi_col_order" class="table table-bordered table-hover align-middle text-nowrap">
+            <thead class="table-light">
+                            <tr>
+                                <th>Jalur Pendaftaran</th>
+                                <th>NISN</th>
+                                <th>Virtual Account</th>
+                                <th>Tahun Ajaran</th>
+                                <th>Status Pembayaran</th>
+                                <th>Status Registrasi</th>
+                                <th>Detail</th>
+                                <th>Aksi</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
         ';
 
+
         foreach ($result as $key => $item) {
+
             $output .=
                 '
                 <tr>
-                    <td class="p-3">' .
-                $item->room_name .
-                '</td>
-                    <td class="p-3">' .
-                $item->floor .
-                '</td>
-                    <td class="p-3">' .
-                $item->capacity .
-                '</td>
-                    <td>
-                        <a  class="btn btnDetail" data-id=' .
-                $item->id .
-                '><img src="' .
-                asset('icons/detail.svg') .
-                '"></a>
-                        <a  class="btn btnEdit" data-id=' .
-                $item->id .
-                '><img src="' .
-                asset('icons/edit.svg') .
-                '"></a>
-                        <a class="btn btnDelete"  data-id="' .
-                $item->id .
-                '" data-room_name="' .
-                $item->room_name .
-                '"><img src="' .
-                asset('icons/delete.svg') .
-                '"></a>
+                    <td class="p-3">' .$item->nama_jalur .'</td>
+                    <td class="p-3">' .$item->nisn .'</td>
+                    <td class="p-3">' .$item->virtual_account .'</td>
+                    <td class="p-3">' .$item->tahunajaran .'</td>
+                    <td class="p-3 text-center text-'.$item->colorpayment.' fw-semibold">' .$item->nama_payment .'</td>
+                    <td class="p-3 text-center text-'.$item->regiscolor.' fw-semibold">' .$item->nama_registrasi .'</td>
+
+                    <td class="text-center">
+                        <button type="button" class="btn btn-primary btnDetail" data-id=' .$item->idReg .' data-image='.$item->bukti_bayar.'>Lihat
+                        </button>
                     </td>
+                    <td class="text-center"><a type="button" href="'. url('/pendaftaran/form/edit/'.$item->idReg.'').'" class="btn btn-warning btnEdit" data-id=' .$item->idReg .' >
+                                        Edit
+                                    </a>
+                                    <a type="button" href="'. url('/pendaftaran/form/edit/'.$item->idReg.'').'" class="btn btn-warning btnEdit" data-id=' .$item->idReg .' >
+                                        Edit
+                                    </a></td>
                 </tr>
             ';
         }
