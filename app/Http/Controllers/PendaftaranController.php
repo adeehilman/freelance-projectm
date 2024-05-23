@@ -16,6 +16,7 @@ class PendaftaranController extends Controller
         $getMenu = DB::select("SELECT * FROM tbl_menucards WHERE card_role = '$role'");
         $getGelombang = DB::select('SELECT * FROM tbl_mastergelombang');
         $getJurusan = DB::select('SELECT * FROM tbl_masterjurusan');
+        $getMasterTmpTinggal = DB::select('SELECT * FROM tbl_mastertempattinggal');
 
         $data = [
             'userInfo' => DB::table('tbl_users')->where('nisn', session('loggedInUser'))->first(),
@@ -23,6 +24,7 @@ class PendaftaranController extends Controller
             'role' => $role,
             'list_gelombang' => $getGelombang,
             'list_jurusan' => $getJurusan,
+            'list_mastertmpttinggal' => $getMasterTmpTinggal,
             // 'userRole' => (int) session()->get('loggedInUser')['session_roles'],
             // 'positionName' => DB::table('tbl_rolemeeting')
             //     ->select('name')

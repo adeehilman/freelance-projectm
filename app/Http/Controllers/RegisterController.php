@@ -37,7 +37,7 @@ class RegisterController extends Controller
             return response()->json([
                 'MSG' => 'S',
                 'message' => 'Akun berhasil dibuat'
-            ]);
+            ],200);
 
         } catch (\Throwable $th) {
             // dd($th);

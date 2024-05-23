@@ -168,7 +168,7 @@
             showMessage('success', res.message);
             $('#modalAddJalur').modal('hide');
 
-            if (res.status === 200) {
+            if (res.MSG === 'S') {
                 window.location = '{{ route('login') }}'
             }
             // window.location.reload();

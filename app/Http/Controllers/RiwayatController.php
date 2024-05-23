@@ -91,14 +91,16 @@ class RiwayatController extends Controller
                     <td class="text-center"><a type="button" href="'. url('/pendaftaran/form/edit/'.$item->idReg.'').'" class="btn btn-warning btnEdit" data-id=' .$item->idReg .' >
                                         Edit
                                     </a>
-                                    <a type="button" href="'. url('/pendaftaran/form/edit/'.$item->idReg.'').'" class="btn btn-warning btnEdit" data-id=' .$item->idReg .' >
-                                        Edit
-                                    </a></td>
+                                   </td>
                 </tr>
             ';
         }
 
         $output .= '</tbody></table>';
         return $output;
+
+        // <a type="button" href="'. url('/pendaftaran/form/edit/'.$item->idReg.'').'" class="btn btn-warning btnEdit" data-id=' .$item->idReg .' >
+        //                                 Edit
+        //                             </a>
     }
 }

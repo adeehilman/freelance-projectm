@@ -399,9 +399,17 @@
                                             <label for="alamatStatus" class="form-label align-items-center">Status Tempat
                                                 Tinggal<danger class="text-danger">*</danger></label>
                                         </div>
+
+
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control required" id="alamatStatus"
-                                                name="alamatStatus" aria-describedby="emailHelp" required>
+                                                <select class="form-select" id="alamatStatus" name="alamatStatus"
+                                                data-placeholder="Pilih Status Tempat tinggal">
+                                                @foreach ($list_mastertmpttinggal as $item)
+                                                    <option value="{{ $item->name }}"
+                                                        {{ $jurusan == $item->name ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">

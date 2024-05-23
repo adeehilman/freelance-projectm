@@ -21,6 +21,7 @@ class FormPendaftaranController extends Controller
         $jalurInfo = DB::select("SELECT *, b.nama_jurusan, b.color_label, a.jurusan_id,
             (SELECT nama_gelombang FROM tbl_mastergelombang c WHERE a.gelombang_id = c.id) as nama_gelombang
             FROM tbl_jalurpendaftaran a INNER JOIN tbl_masterjurusan b ON a.jurusan_id = b.id WHERE a.id = '$dataId'");
+            $getMasterTmpTinggal = DB::select('SELECT * FROM tbl_mastertempattinggal');
 
         $getMenu = DB::select("SELECT * FROM tbl_menucards WHERE card_role = '$role'");
         $data = [
@@ -36,6 +37,7 @@ class FormPendaftaranController extends Controller
             'list_gelombang' => $getGelombang,
             'list_jurusan' => $getJurusan,
             'list_jalur'  => $getJalur,
+            'list_mastertmpttinggal' => $getMasterTmpTinggal,
             // 'userRole' => (int) session()->get('loggedInUser')['session_roles'],
             // 'positionName' => DB::table('tbl_rolemeeting')
             //     ->select('name')
