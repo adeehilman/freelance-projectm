@@ -167,12 +167,16 @@
             hideSpinner('SpinnerBtnAdd', 'btnSubmit');
             showMessage('success', res.message);
             $('#modalAddJalur').modal('hide');
-            $('#formRegister').trigger('reset');
-            window.location = '{{ route('login') }}'
+
+            if (res.status === 200) {
+                window.location = '{{ route('login') }}'
+            }
             // window.location.reload();
         }).fail(err => {
-            showMessage('error', 'Sorry! we failed to insert data')
+
+            e.preventDefault();
             hideSpinner('SpinnerBtnAdd', 'btnSubmit');
+            showMessage('error', err.responseJSON.message)
         });
     });
 </script>

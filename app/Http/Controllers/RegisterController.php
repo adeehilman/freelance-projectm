@@ -40,6 +40,7 @@ class RegisterController extends Controller
             ]);
 
         } catch (\Throwable $th) {
+            // dd($th);
             DB::rollback();
             return response()->json([
                 'msg' => 'e',
