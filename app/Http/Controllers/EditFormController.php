@@ -35,6 +35,7 @@ class EditFormController extends Controller
             INNER JOIN tbl_alamatsiswa als ON als.siswa_id = sb.id
             INNER JOIN tbl_jalurpendaftaran jp ON jp.id = ps.jalurpendaftaran_id
         WHERE ps.id = $idForm");
+        $getMasterTmpTinggal = DB::select('SELECT * FROM tbl_mastertempattinggal');
 
         // dd($result);
         $getMenu = DB::select("SELECT * FROM tbl_menucards WHERE card_role = '$role'");
@@ -46,6 +47,7 @@ class EditFormController extends Controller
             'list_gelombang' => $getGelombang,
             'list_jurusan' => $getJurusan,
             'list_jalur' => $getJalur,
+            'list_mastertmpttinggal' => $getMasterTmpTinggal,
             // 'userRole' => (int) session()->get('loggedInUser')['session_roles'],
             // 'positionName' => DB::table('tbl_rolemeeting')
             //     ->select('name')
@@ -57,6 +59,7 @@ class EditFormController extends Controller
 
     public function updateSiswa(Request $request)
     {
+        // dd($request->alamatStatus);
         // dd($request->all());
         $fileBukti = $request->file('buktiBayarAdd') ?? null;
 
@@ -152,12 +155,12 @@ class EditFormController extends Controller
 
             $oldata = DB::table('tbl_pendaftaransiswa')->where('id', $request->idForm)->first();
             $virtualacc = DB::table('tbl_va')->where('is_active', true)->first();
-
+// dd($request->jalurEdit);
             DB::table('tbl_pendaftaransiswa')
             ->where('id', $request->idForm)
             ->update([
                 'virtual_account' => $virtualacc->virtual_account,
-                'jalurpendaftaran_id' => $request->jalurId,
+                'jalurpendaftaran_id' => $request->jalurEdit,
                 'gel_id' => $request->gelomhangAdd,
                 'tahunajaran' => $request->tahunAJaran,
                 'statusdaftar_id' => $oldata->statusdaftar_id,

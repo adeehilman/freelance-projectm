@@ -437,9 +437,14 @@
                                                 Tinggal<danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control required" id="alamatStatus"
-                                                name="alamatStatus" aria-describedby="emailHelp"
-                                                value="{{ $valueForm->status_rumah }}" required>
+                                                <select class="form-select" id="alamatStatus" name="alamatStatus"
+                                                data-placeholder="Pilih Status Tempat tinggal">
+                                                @foreach ($list_mastertmpttinggal as $item)
+                                                    <option value="{{ $item->name }}"
+                                                    {{ $valueForm->status_rumah == $item->name ? 'selected' : '' }}>
+                                                    {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row d-flex  align-items-center mb-3">
@@ -634,7 +639,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label for="pendidikanIbu" class="form-label align-items-center">Pendidikan
-                                                Ayah
+                                                Ibu
                                                 <danger class="text-danger">*</danger>
                                             </label>
                                         </div>
@@ -794,7 +799,7 @@
                                                 data-placeholder="Pilih Jurusan">
                                                 @foreach ($list_jurusan as $item)
                                                     <option
-                                                        value="{{ $valueForm->jurusan_id }}"{{ $valueForm->jurusan_id == $item->id ? 'selected' : '' }}>
+                                                        value="{{ $item->id }}"{{ $valueForm->jurusan_id == $item->id ? 'selected' : '' }}>
                                                         {{ $item->nama_jurusan }}</option>
                                                 @endforeach
                                             </select>
@@ -824,12 +829,12 @@
                                                 Pendaftaran<danger class="text-danger">*</danger></label>
                                         </div>
                                         <div class="col-md-10">
-                                            <input type="text" value="{{ $valueForm->idjalur }}" name="jalurId"
-                                                hidden>
-                                            <select class="form-select" id="jalurAdd" name="jalurAdd"
+                                            {{-- <input type="text" value="{{ $valueForm->idjalur }}" name="jalurId"
+                                                hidden> --}}
+                                            <select class="form-select" id="jalurEdit" name="jalurEdit"
                                                 data-placeholder="Pilih Jalur">
                                                 @foreach ($list_jalur as $item)
-                                                    <option value="{{ $valueForm->idjalur }}"
+                                                    <option value="{{ $item->id }}"
                                                         {{ $valueForm->idjalur == $item->id ? 'selected' : '' }}>
                                                         {{ $item->nama_jalur }}</option>
                                                 @endforeach
