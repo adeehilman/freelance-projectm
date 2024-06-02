@@ -53,6 +53,7 @@ Route::group(['middleware' => ['LoginCheck']], function () {
 
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('/riwayat');
     Route::get('/riwayat/getdata', [RiwayatController::class, 'getListData'])->name('riwayat.getdata');
+    Route::post('/riwayat/accRegis', [RiwayatController::class, 'accRegis'])->name('accRegis');
     Route::get('/riwayat/edit', [EditFormController::class, 'index'])->name('/edit-form');
 
     Route::get('/akun', [AkunController::class, 'index'])->name('akun');

@@ -14,10 +14,13 @@ class RiwayatController extends Controller
         $role = $sessionLogin['session_roles'];
 
         $getMenu = DB::select("SELECT * FROM tbl_menucards WHERE card_role = '$role'");
+        $statusregis = DB::select("SELECT * FROM tbl_statuspayment");
+
         $data = [
             'userInfo' => DB::table('tbl_users')->where('nisn', session('loggedInUser'))->first(),
             'menuItems' => $getMenu,
             'role' => $role,
+            'list_statusregis' => $statusregis,
             // 'userRole' => (int) session()->get('loggedInUser')['session_roles'],
             // 'positionName' => DB::table('tbl_rolemeeting')
             //     ->select('name')
@@ -38,7 +41,7 @@ class RiwayatController extends Controller
         }else{
             $code = "SELECT id FROM tbl_siswabaru a WHERE a.nisn = $nisn";
         }
-        // dd($nisn);
+        // // dd($nisn);
         $result = DB::select("SELECT ps.id as idReg, jp.nama_jalur, sb.nisn, ps.virtual_account, ps.tahunajaran,
         payment.color as colorpayment,
         regis.color as regiscolor,
@@ -48,7 +51,7 @@ class RiwayatController extends Controller
         INNER JOIN tbl_siswabaru sb ON ps.siswa_id = sb.id
         INNER JOIN tbl_mastergelombang mg ON ps.gel_id = mg.id
         INNER JOIN tbl_jalurpendaftaran jp ON ps.jalurpendaftaran_id = jp.id
-        INNER JOIN tbl_statuspayment payment ON payment.id = ps.statusdaftar_id
+        INNER JOIN tbl_statuspayment payment ON payment.id = ps.payment_id
         INNER JOIN tbl_statusregistrasi regis ON regis.id = ps.statusdaftar_id
         WHERE siswa_id IN ($code)");
 
@@ -73,7 +76,16 @@ class RiwayatController extends Controller
 
 
         foreach ($result as $key => $item) {
+            $acc = '';
+            // 2 = TU  staff
+            // 4 = bendahara
 
+             if ($role == 1 || $role == 2 || $role == 4) {
+                if ($item->nama_payment != 'Sudah bayar' && $item->nama_registrasi != 'Diterima') {
+                    $acc = '
+                            <button type="button" class="btn btn-success btnAcc mx-2" data-id="' .$item->idReg .'" data-image="' .$item->bukti_bayar.'">Accept</button>';
+                }
+                        }
             $output .=
                 '
                 <tr>
@@ -88,10 +100,15 @@ class RiwayatController extends Controller
                         <button type="button" class="btn btn-primary btnDetail" data-id=' .$item->idReg .' data-image='.$item->bukti_bayar.'>Lihat
                         </button>
                     </td>
-                    <td class="text-center"><a type="button" href="'. url('/pendaftaran/form/edit/'.$item->idReg.'').'" class="btn btn-warning btnEdit" data-id=' .$item->idReg .' >
+
+                    <td class="text-center">
+                        <a type="button" href="'. url('/pendaftaran/form/edit/'.$item->idReg.'').'" class="btn btn-warning btnEdit" data-id=' .$item->idReg .' >
                                         Edit
                                     </a>
+                                    '.$acc
+                        .'
                                    </td>
+
                 </tr>
             ';
         }
@@ -102,5 +119,31 @@ class RiwayatController extends Controller
         // <a type="button" href="'. url('/pendaftaran/form/edit/'.$item->idReg.'').'" class="btn btn-warning btnEdit" data-id=' .$item->idReg .' >
         //                                 Edit
         //                             </a>
+    }
+
+    public function accRegis(Request $request){
+
+        $request->validate([
+            'addRole' => 'required'
+        ]);
+
+        // dd($request->all());
+        try {
+
+            DB::beginTransaction();
+            DB::table("tbl_pendaftaransiswa")->where('id', $request->id)->update([
+                'payment_id' => $request->addRole
+            ]);
+
+            DB::commit();
+            return response()->json([
+                'MSG' => 'S',
+                'message' => 'Edit berhasil'
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            dd($th);
+        }
     }
 }

@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
 
         <style>
-            .wizard-content .wizard>.content {
+            /* .wizard-content .wizard>.content {
                 background: transparent;
                 overflow: hidden;
                 position: relative;
@@ -35,7 +35,7 @@
                 padding: 0;
                 margin: 0;
                 height: 100vh;
-            }
+            } */
 
             @media only screen and (max-width: 767px) {
 
@@ -44,6 +44,16 @@
                     display: none;
                     /* Menyembunyikan elemen h5 */
                 }
+
+                .wizard-content .wizard>.content {
+                background: transparent;
+                overflow: hidden;
+                position: relative;
+                width: auto;
+                padding: 0;
+                margin: 0;
+                height: 10px;
+            }
             }
 
             @media only screen and (min-width: 600px) and (max-width: 999px) {
@@ -53,6 +63,15 @@
                     display: none;
                     /* Menyembunyikan elemen h5 */
                 }
+                .wizard-content .wizard>.content {
+                background: transparent;
+                overflow: hidden;
+                position: relative;
+                width: auto;
+                padding: 0;
+                margin: 0;
+                height: 10px;
+            }
             }
         </style>
 
