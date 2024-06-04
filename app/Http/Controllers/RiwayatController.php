@@ -14,13 +14,15 @@ class RiwayatController extends Controller
         $role = $sessionLogin['session_roles'];
 
         $getMenu = DB::select("SELECT * FROM tbl_menucards WHERE card_role = '$role'");
-        $statusregis = DB::select("SELECT * FROM tbl_statuspayment");
+        $payment = DB::select("SELECT * FROM tbl_statuspayment");
+        $statusregis = DB::select("SELECT * FROM tbl_statusregistrasi");
 
         $data = [
             'userInfo' => DB::table('tbl_users')->where('nisn', session('loggedInUser'))->first(),
             'menuItems' => $getMenu,
             'role' => $role,
             'list_statusregis' => $statusregis,
+            'list_payment' => $payment,
             // 'userRole' => (int) session()->get('loggedInUser')['session_roles'],
             // 'positionName' => DB::table('tbl_rolemeeting')
             //     ->select('name')
@@ -132,7 +134,8 @@ class RiwayatController extends Controller
 
             DB::beginTransaction();
             DB::table("tbl_pendaftaransiswa")->where('id', $request->id)->update([
-                'payment_id' => $request->addRole
+                'payment_id' => $request->addRole,
+                'statusdaftar_id' => $request->addRegis,
             ]);
 
             DB::commit();

@@ -40,7 +40,7 @@
                             <div class="col-sm-12 mb-3">
                                 <label for="addRole" class="form-label">Status Pembayaran</label>
                                 <select class="form-select" id="addRole" name="addRole" data-placeholder="Pilih Role">
-                                    @foreach ($list_statusregis as $item)
+                                    @foreach ($list_payment as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama_payment }}</option>
                                     @endforeach
                                 </select>
@@ -48,9 +48,9 @@
                             @if ($role == 4 || $role == 1 )
                             <div class="col-sm-12 mb-3">
                                 <label for="addRole" class="form-label">Status Registrasi</label>
-                                <select class="form-select" id="addRole" name="addRole" data-placeholder="Pilih Role">
+                                <select class="form-select" id="addRegis" name="addRegis" data-placeholder="Pilih Role">
                                     @foreach ($list_statusregis as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_payment }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->nama_registrasi }}</option>
                                     @endforeach
                                 </select>
                             </div>
