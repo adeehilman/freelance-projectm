@@ -57,5 +57,8 @@ Route::group(['middleware' => ['LoginCheck']], function () {
     Route::get('/riwayat/edit', [EditFormController::class, 'index'])->name('/edit-form');
 
     Route::get('/akun', [AkunController::class, 'index'])->name('akun');
+    Route::get('/akun/getList', [AkunController::class, 'getList'])->name('akun.getList');
+    Route::post('/akun/insertAKun', [AkunController::class, 'insertAKun'])->name('akun.insertAKun');
+    Route::post('/akun/editAkun', [AkunController::class, 'editAkun'])->name('akun.editAkun');
 
 });

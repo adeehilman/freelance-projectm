@@ -178,13 +178,16 @@
                 e.preventDefault();
 
                 const id = $(this).data('id');
-                const buktibayar = $(this).data('image');
+                const statusdaftar_id = $(this).data('idregis');
+                const payment_id = $(this).data('idpayment');
                 const modalFormEdit = $('#modalStatus');
                 const buktibayarLengkap = 'UploadBuktiBayar/' + buktibayar;
 
                 $('#buktibayar').attr('src', buktibayarLengkap);
                 modalFormEdit.modal('show');
                 $('#idData').val(id);
+                $('#addRegis').val(statusdaftar_id);
+                $('#addRole').val(payment_id);
                 // Ajax request
             });
 

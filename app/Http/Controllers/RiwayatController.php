@@ -47,7 +47,8 @@ class RiwayatController extends Controller
         $result = DB::select("SELECT ps.id as idReg, jp.nama_jalur, sb.nisn, ps.virtual_account, ps.tahunajaran,
         payment.color as colorpayment,
         regis.color as regiscolor,
-        payment.nama_payment, regis.nama_registrasi, ps.bukti_bayar
+        payment.nama_payment, regis.nama_registrasi, ps.bukti_bayar,
+        ps.statusdaftar_id, ps.payment_id
 
         FROM tbl_pendaftaransiswa ps
         INNER JOIN tbl_siswabaru sb ON ps.siswa_id = sb.id
@@ -83,10 +84,8 @@ class RiwayatController extends Controller
             // 4 = bendahara
 
              if ($role == 1 || $role == 2 || $role == 4) {
-                if ($item->nama_payment != 'Sudah bayar' && $item->nama_registrasi != 'Diterima') {
-                    $acc = '
-                            <button type="button" class="btn btn-success btnAcc mx-2" data-id="' .$item->idReg .'" data-image="' .$item->bukti_bayar.'">Accept</button>';
-                }
+                $acc = '
+                            <button type="button" class="btn btn-success btnAcc mx-2" data-idpayment="' .$item->payment_id .'" data-idregis="' .$item->statusdaftar_id.'">Accept</button>';
                         }
             $output .=
                 '
