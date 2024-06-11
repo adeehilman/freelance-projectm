@@ -75,11 +75,11 @@ class FormPendaftaranController extends Controller
             ]);
         } catch (\Throwable $th) {
             DB::rollback();
+            dd($th);
             return response()->json([
                 'MSGTYPE' => 'W',
                 'MSG' => 'Something Went Wrong',
             ], 400);
-            dd($th);
         }
     }
 

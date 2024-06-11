@@ -74,9 +74,10 @@ class PendaftaranController extends Controller
     {
         dd($request->all());
         try {
-            // $insert = DB::table('tbl_jalurpendaftaran')->insert([
-            //     'nama_jalur' => $request->nama_jurusan
-            // ]);
+            $insert = DB::table('tbl_jalurpendaftaran')->insert([
+                'nama_jalur' => $request->nama_jurusan,
+                'jurusan'
+            ]);
         } catch (\Throwable $th) {
             dd($th);
         }

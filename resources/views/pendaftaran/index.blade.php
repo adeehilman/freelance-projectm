@@ -293,12 +293,7 @@
                                             </div>
                                         </div>
                                         <div class="row mt-2">
-                                            <div class="col-sm-6">
-                                                <p>Kuota</p>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <span>${item.kuota}</span>
-                                            </div>
+
 
 
                                             <a href="{{ url('/pendaftaran/form') }}/${item.id}" class="btn ${buttonClass} mt-2">${buttonText}</a>
